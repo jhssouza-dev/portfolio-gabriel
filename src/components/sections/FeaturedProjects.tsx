@@ -11,7 +11,7 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
       {/*
        *  data-stacked-catalog  → raiz do efeito (useStackedPanels)
        *  data-catalog-panel    → cada painel (alvo do pin + scrub)
-       *  data-panel-*          → elementos internos animados pela timeline
+       *  data-panel-*          → reservado para animações internas futuras
        *  Sem data-reveal aqui → evita conflito com useGsapReveal
        */}
       <div
@@ -19,17 +19,12 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
         className="relative hidden h-svh overflow-hidden bg-canvas lg:block"
       >
         {sorted.map((project, i) => (
-          <div
-            key={project.id}
+          <article
+            key={project.slug}
             data-catalog-panel
-            className="absolute inset-0 bg-surface"
-            style={{
-              zIndex: i + 1,
-              // Painéis 2+ começam fora da tela — GSAP parte daqui no fromTo
-              transform: i > 0 ? "translateY(100%)" : undefined,
-            }}
+            className="absolute inset-0 h-svh w-full bg-surface"
           >
-            {/* Cover photo — wrapper recebe data-panel-image para scale sutil */}
+            {/* Cover photo */}
             <div data-panel-image className="absolute inset-0">
               <Image
                 src={project.coverImage.src}
@@ -144,7 +139,7 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                 </Link>
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
 
