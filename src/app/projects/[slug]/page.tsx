@@ -47,6 +47,15 @@ export default async function ProjectPage({
 
       {/* ── CONTEÚDO ─────────────────────────────────────────── */}
       <div className="mx-auto max-w-5xl px-8 py-20 md:px-16">
+        {/* Link de retorno — topo do conteúdo, antes dos metadados */}
+        <Link
+          href="/#projects"
+          data-reveal="label"
+          className="mb-12 inline-flex items-center gap-2 font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary transition-colors hover:text-fg"
+        >
+          ← Catálogo de projetos
+        </Link>
+
         <div className="grid grid-cols-1 gap-16 md:grid-cols-[1fr_260px] md:gap-12">
           {/* Texto principal */}
           <div>
@@ -77,37 +86,50 @@ export default async function ProjectPage({
         <ProjectGallery project={project} />
       </div>
 
-      {/* ── NAVEGAÇÃO ANTERIOR / PRÓXIMO ─────────────────────── */}
-      {(prev || next) && (
-        <div className="mx-auto max-w-5xl px-8 pb-24 md:px-16">
-          <div className="flex items-start justify-between border-t border-border pt-10">
-            <div>
-              {prev && (
-                <Link href={`/projects/${prev.slug}`} className="group">
-                  <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
-                    ← Anterior
-                  </span>
-                  <span className="font-serif text-base italic text-secondary transition-colors group-hover:text-fg">
-                    {prev.title}
-                  </span>
-                </Link>
-              )}
-            </div>
-            <div className="text-right">
-              {next && (
-                <Link href={`/projects/${next.slug}`} className="group">
-                  <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
-                    Próximo →
-                  </span>
-                  <span className="font-serif text-base italic text-secondary transition-colors group-hover:text-fg">
-                    {next.title}
-                  </span>
-                </Link>
-              )}
-            </div>
+      {/* ── NAVEGAÇÃO: ANTERIOR / LISTAGEM / PRÓXIMO ────────── */}
+      <div className="mx-auto max-w-5xl px-8 pb-24 md:px-16">
+        <div className="grid grid-cols-3 items-start gap-4 border-t border-border pt-10">
+          {/* Anterior */}
+          <div>
+            {prev && (
+              <Link href={`/projects/${prev.slug}`} className="group">
+                <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
+                  ← Anterior
+                </span>
+                <span className="font-serif text-base italic text-secondary transition-colors group-hover:text-fg">
+                  {prev.title}
+                </span>
+              </Link>
+            )}
+          </div>
+
+          {/* Centro: voltar ao catálogo da Home — sempre visível */}
+          <div className="flex justify-center">
+            <Link href="/#projects" className="group text-center">
+              <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted transition-colors group-hover:text-fg">
+                Catálogo
+              </span>
+              <span className="font-serif text-sm italic text-secondary transition-colors group-hover:text-fg">
+                Ver catálogo →
+              </span>
+            </Link>
+          </div>
+
+          {/* Próximo */}
+          <div className="text-right">
+            {next && (
+              <Link href={`/projects/${next.slug}`} className="group">
+                <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
+                  Próximo →
+                </span>
+                <span className="font-serif text-base italic text-secondary transition-colors group-hover:text-fg">
+                  {next.title}
+                </span>
+              </Link>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </main>
   );
 }

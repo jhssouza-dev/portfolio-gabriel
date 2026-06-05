@@ -1,9 +1,21 @@
+import Image from "next/image";
 import type { Project } from "@/types/project";
 
 export default function ProjectHero({ project }: { project: Project }) {
   return (
     <section className="relative flex h-svh flex-col justify-end bg-surface">
-      <div className="absolute inset-0 bg-linear-to-br from-canvas via-elevated to-surface" />
+      {/* Cover photo — below all overlays */}
+      <Image
+        src={project.coverImage.src}
+        alt={project.coverImage.alt}
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+
+      {/* Atmosphere gradient — semi-transparent so photo shows through */}
+      <div className="absolute inset-0 bg-linear-to-br from-canvas/70 via-canvas/10 to-transparent" />
       <div
         className="absolute inset-0"
         style={{
@@ -11,6 +23,7 @@ export default function ProjectHero({ project }: { project: Project }) {
             "radial-gradient(ellipse 80% 60% at 35% 45%, rgba(176,138,90,0.08) 0%, transparent 65%)",
         }}
       />
+      {/* Strong bottom gradient — keeps text legible over any photo */}
       <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-linear-to-t from-canvas to-transparent" />
 
       <div className="relative z-10 px-8 pb-16 md:px-16 md:pb-20">

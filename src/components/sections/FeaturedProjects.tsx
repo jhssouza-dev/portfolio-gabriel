@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types/project";
 
@@ -7,6 +8,12 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
   return (
     <section id="projects">
       {/* ── DESKTOP: stacked catalog panels ───────────────────── */}
+      {/*
+       *  data-stacked-catalog  → raiz do efeito (useStackedPanels)
+       *  data-catalog-panel    → cada painel (alvo do pin + scrub)
+       *  data-panel-*          → elementos internos animados pela timeline
+       *  Sem data-reveal aqui → evita conflito com useGsapReveal
+       */}
       <div
         data-stacked-catalog
         className="relative hidden h-svh overflow-hidden bg-canvas lg:block"
@@ -18,19 +25,24 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
             className="absolute inset-0 bg-surface"
             style={{
               zIndex: i + 1,
+              // Painéis 2+ começam fora da tela — GSAP parte daqui no fromTo
               transform: i > 0 ? "translateY(100%)" : undefined,
             }}
           >
-            {/* Gradient background layer */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  i % 2 === 0
-                    ? "linear-gradient(135deg, var(--color-canvas) 0%, var(--color-elevated) 100%)"
-                    : "linear-gradient(135deg, var(--color-elevated) 0%, var(--color-surface) 100%)",
-              }}
-            />
+            {/* Cover photo — wrapper recebe data-panel-image para scale sutil */}
+            <div data-panel-image className="absolute inset-0">
+              <Image
+                src={project.coverImage.src}
+                alt={project.coverImage.alt}
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+
+            {/* Subtle scrim */}
+            <div className="absolute inset-0 bg-canvas/25" />
 
             {/* Accent radial glow */}
             <div
@@ -41,43 +53,94 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
               }}
             />
 
-            {/* Decorative project number */}
+            {/* Decorative watermark — sem data-panel (decorativo, não anima) */}
             <div
               className="absolute right-16 top-1/2 -translate-y-1/2 select-none font-display font-black uppercase leading-none tracking-tight text-fg"
-              style={{
-                fontSize: "clamp(10rem, 22vw, 20rem)",
-                opacity: 0.035,
-              }}
+              style={{ fontSize: "clamp(10rem, 22vw, 20rem)", opacity: 0.035 }}
             >
               {String(i + 1).padStart(2, "0")}
             </div>
 
-            {/* Bottom gradient overlay */}
+            {/* Strong bottom gradient */}
             <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-linear-to-t from-canvas to-transparent" />
 
-            {/* Panel content */}
+            {/* Panel counter — data-panel-counter */}
+            <div data-panel-counter className="absolute left-16 top-12">
+              <span className="font-sans text-[0.55rem] font-medium uppercase tracking-[0.3em] text-muted/60">
+                {String(i + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(sorted.length).padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* Panel content — bottom */}
             <div className="absolute bottom-0 left-0 right-0 px-16 pb-20">
-              <p className="mb-4 font-sans text-[0.6rem] font-medium uppercase tracking-[0.2em] text-accent">
-                {project.type}&nbsp;·&nbsp;{project.year}
-              </p>
-              <h2 className="font-display text-[clamp(3rem,7vw,6.5rem)] font-black uppercase leading-none tracking-tight text-fg">
+              {/* Category · Location · Year — data-panel-kicker */}
+              <div
+                data-panel-kicker
+                className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-1"
+              >
+                <span className="font-sans text-[0.6rem] font-medium uppercase tracking-[0.22em] text-accent">
+                  {project.type}
+                </span>
+                <span className="font-sans text-[0.6rem] uppercase tracking-[0.15em] text-secondary">
+                  {project.location}
+                </span>
+                <span className="font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
+                  {project.year}
+                </span>
+              </div>
+
+              {/* Title — data-panel-title */}
+              <h2
+                data-panel-title
+                className="font-display text-[clamp(3rem,7vw,6.5rem)] font-black uppercase leading-none tracking-tight text-fg"
+              >
                 {project.title}
               </h2>
+
+              {/* Subtitle — data-panel-subtitle */}
               {project.subtitle && (
-                <p className="mt-3 max-w-md font-serif text-[clamp(1rem,1.5vw,1.2rem)] italic leading-relaxed text-secondary">
+                <p
+                  data-panel-subtitle
+                  className="mt-4 max-w-lg font-serif text-[clamp(1rem,1.5vw,1.2rem)] italic leading-relaxed text-secondary"
+                >
                   {project.subtitle}
                 </p>
               )}
-              <div className="mt-6 flex items-center gap-8">
-                <span className="font-sans text-xs text-muted">
-                  {project.location}&nbsp;·&nbsp;{project.area.toLocaleString("pt-BR")}&nbsp;m²
-                </span>
+
+              {/* Bottom row: meta + CTA */}
+              <div className="mt-8 flex items-end gap-10">
+                {/* Area + Status juntos — data-panel-meta */}
+                <div data-panel-meta className="flex items-end gap-10">
+                  <div>
+                    <p className="font-sans text-[0.55rem] uppercase tracking-[0.18em] text-muted">
+                      Área
+                    </p>
+                    <p className="mt-0.5 font-sans text-sm font-medium text-fg">
+                      {project.area.toLocaleString("pt-BR")}&nbsp;m²
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-sans text-[0.55rem] uppercase tracking-[0.18em] text-muted">
+                      Status
+                    </p>
+                    <p className="mt-0.5 font-sans text-sm font-medium text-fg">
+                      {project.status}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex-1" />
+
+                {/* CTA — data-panel-cta */}
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="group flex items-center gap-2 font-sans text-[0.65rem] font-medium uppercase tracking-[0.18em] text-secondary transition-colors hover:text-fg"
+                  data-panel-cta
+                  className="group inline-flex items-center gap-3 border border-fg/20 px-5 py-2.5 font-sans text-[0.6rem] font-medium uppercase tracking-[0.22em] text-fg transition-all hover:border-fg hover:bg-fg hover:text-canvas"
                 >
                   Ver projeto
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                    →
+                  </span>
                 </Link>
               </div>
             </div>
@@ -85,56 +148,82 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
         ))}
       </div>
 
-      {/* ── MOBILE: plain card list ────────────────────────────── */}
+      {/* ── MOBILE: editorial card list ───────────────────────── */}
+      {/* Mobile não usa stacked panels nem data-panel-* */}
       <div className="px-8 pb-40 lg:hidden md:px-16">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-10 flex items-baseline justify-between border-t border-border pt-8">
+          {/* Section header */}
+          <div className="mb-8 flex items-baseline justify-between border-t border-border pt-8">
             <p className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-accent">
-              Projetos
+              Catálogo
             </p>
             <p className="font-sans text-[0.65rem] text-muted">
-              {projects.length}&nbsp;obras
+              {sorted.length}&nbsp;{sorted.length === 1 ? "obra" : "obras"}
             </p>
           </div>
 
+          {/* Cards */}
           <div>
             {sorted.map((project, index) => (
               <Link
                 key={project.id}
                 href={`/projects/${project.slug}`}
-                className="group grid grid-cols-1 gap-6 border-b border-border py-9 transition-colors hover:border-border md:grid-cols-[1fr_220px] md:gap-4"
+                className="group block border-b border-border py-8"
               >
-                <div className="flex gap-6">
-                  <span className="w-6 shrink-0 pt-0.75 font-sans text-[0.65rem] tabular-nums text-muted">
+                {/* Cover image */}
+                <div
+                  className="relative mb-6 overflow-hidden bg-elevated"
+                  style={{ aspectRatio: "3/2" }}
+                >
+                  <Image
+                    src={project.coverImage.src}
+                    alt={project.coverImage.alt}
+                    fill
+                    sizes="(max-width: 768px) calc(100vw - 64px), calc(100vw - 128px)"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </div>
+
+                {/* Card content */}
+                <div className="flex items-start gap-5">
+                  <span className="w-5 shrink-0 pt-1 font-sans text-[0.6rem] tabular-nums text-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <div>
-                    <h2 className="font-serif text-xl italic leading-snug text-fg transition-colors group-hover:text-accent md:text-2xl">
+                  <div className="min-w-0 flex-1">
+                    <h2 className="font-serif text-xl italic leading-snug text-fg transition-colors group-hover:text-accent">
                       {project.title}
                     </h2>
-                    {project.subtitle !== undefined && (
-                      <p className="mt-1 font-sans text-sm leading-relaxed text-secondary">
+                    {project.subtitle && (
+                      <p className="mt-1.5 font-sans text-sm leading-relaxed text-secondary">
                         {project.subtitle}
                       </p>
                     )}
+                    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <span className="font-sans text-[0.6rem] font-medium uppercase tracking-[0.12em] text-muted">
+                        {project.type}
+                      </span>
+                      <span aria-hidden className="font-sans text-xs text-muted/40">
+                        ·
+                      </span>
+                      <span className="font-sans text-xs text-secondary">
+                        {project.location}
+                      </span>
+                      <span aria-hidden className="font-sans text-xs text-muted/40">
+                        ·
+                      </span>
+                      <span className="font-sans text-xs text-muted">
+                        {project.year}&nbsp;·&nbsp;{project.area.toLocaleString("pt-BR")}&nbsp;m²
+                      </span>
+                    </div>
+                    {project.status === "Em andamento" && (
+                      <span className="mt-2 inline-block font-sans text-[0.6rem] font-medium uppercase tracking-[0.12em] text-accent">
+                        Em andamento
+                      </span>
+                    )}
+                    <p className="mt-5 font-sans text-[0.6rem] font-medium uppercase tracking-[0.22em] text-secondary transition-colors group-hover:text-fg">
+                      Ver projeto →
+                    </p>
                   </div>
-                </div>
-
-                <div className="ml-12 flex flex-col gap-1.25 md:ml-0 md:items-end">
-                  <span className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.12em] text-muted">
-                    {project.type}
-                  </span>
-                  <span className="font-sans text-xs text-secondary">
-                    {project.location}
-                  </span>
-                  <span className="font-sans text-xs text-muted">
-                    {project.year}&nbsp;·&nbsp;{project.area}&nbsp;m²
-                  </span>
-                  {project.status === "Em andamento" && (
-                    <span className="mt-1 font-sans text-[0.6rem] font-medium uppercase tracking-[0.12em] text-accent">
-                      Em andamento
-                    </span>
-                  )}
                 </div>
               </Link>
             ))}

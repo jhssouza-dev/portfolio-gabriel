@@ -30,8 +30,14 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* fallback âncoras sem JS */
   text-size-adjust: 100%;
+}
+
+/* Quando JS está ativo, Lenis gerencia o scroll suave */
+/* scroll-behavior: smooth conflita com ScrollTrigger pin em alguns browsers */
+.js-ready {
+  scroll-behavior: auto;
 }
 
 body {

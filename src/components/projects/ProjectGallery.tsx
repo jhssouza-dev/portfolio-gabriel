@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Project } from "@/types/project";
 
 export default function ProjectGallery({ project }: { project: Project }) {
@@ -19,6 +20,11 @@ export default function ProjectGallery({ project }: { project: Project }) {
         {items.map((img, i) => {
           const isPortrait = img.width / img.height < 1;
           const ratio = i === 0 ? "16/9" : isPortrait ? "2/3" : "3/2";
+          // First item spans both columns on desktop (wider), others are ~half
+          const sizes =
+            i === 0
+              ? "(max-width: 768px) 100vw, calc(100vw - 128px)"
+              : "(max-width: 768px) 100vw, calc(50vw - 80px)";
 
           return (
             <div
@@ -29,12 +35,19 @@ export default function ProjectGallery({ project }: { project: Project }) {
               }`}
               style={{ aspectRatio: ratio }}
             >
-              {/* Placeholder — substituir por next/image quando houver fotos reais */}
-              <div className="absolute inset-0 flex items-end p-6">
-                <p className="font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
-                  {img.alt}
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes={sizes}
+                className="object-cover"
+              />
+              {/* Caption overlay — only if caption exists */}
+              {img.caption && (
+                <p className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-canvas/80 to-transparent px-6 pb-3 pt-8 font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
+                  {img.caption}
                 </p>
-              </div>
+              )}
             </div>
           );
         })}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MobileNav from "./MobileNav";
 
 export default function Navbar() {
   return (
@@ -7,10 +8,11 @@ export default function Navbar() {
         href="/"
         className="font-display text-lg font-black uppercase tracking-tight text-fg transition-opacity hover:opacity-60"
       >
-        Ana Lima<span className="text-accent">.</span>
+        Gabriel Silva<span className="text-accent">.</span>
       </Link>
 
-      <nav aria-label="Principal" className="flex items-center gap-8">
+      {/* Desktop navigation — oculto abaixo de md */}
+      <nav aria-label="Principal" className="hidden items-center gap-8 md:flex">
         <Link
           href="/#projects"
           className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary transition-colors hover:text-fg"
@@ -30,6 +32,9 @@ export default function Navbar() {
           Contato
         </Link>
       </nav>
+
+      {/* Mobile hamburger — Client Component, oculto em md+ */}
+      <MobileNav />
     </header>
   );
 }

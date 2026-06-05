@@ -35,7 +35,7 @@ export default function Home() {
             data-reveal="title"
             className="font-display text-[clamp(3.5rem,10vw,9rem)] font-black uppercase leading-none tracking-tight text-fg"
           >
-            Ana Lima
+            Gabriel Silva
             <br />
             Arquitetura
           </h1>
