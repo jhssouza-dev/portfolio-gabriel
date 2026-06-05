@@ -106,7 +106,7 @@ export default function MobileNav() {
               onClick={close}
               className="mt-8 flex items-center justify-between bg-fg px-6 py-4 font-sans text-[0.65rem] font-medium uppercase tracking-[0.22em] text-canvas transition-opacity hover:opacity-75"
             >
-              Solicitar orçamento
+              Entrar em contato
               <span className="ml-3">↗</span>
             </Link>
           </nav>
@@ -114,7 +114,7 @@ export default function MobileNav() {
           {/* Rodapé informativo */}
           <div className="px-8 pb-10 pt-6">
             <p className="font-sans text-[0.6rem] text-muted">
-              Ana Lima Arquitetura · São Paulo, SP
+              Gabriel Silva · Portfólio de arquitetura
             </p>
           </div>
         </div>

@@ -26,6 +26,11 @@ export function useStackedPanels(): void {
     );
     if (panels.length < 2) return;
 
+    const navbarHeight =
+      parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--navbar-height")
+      ) || 72;
+
     const ctx = gsap.context(() => {
       const transitionCount = panels.length - 1;
 
@@ -49,9 +54,9 @@ export function useStackedPanels(): void {
         tl.to(
           current,
           {
-            scale: 0.94,
-            opacity: 0.4,
-            filter: "blur(2px)",
+            scale: 0.96,
+            opacity: 0.55,
+            filter: "blur(1.5px)",
             duration: 1,
           },
           i
@@ -69,13 +74,12 @@ export function useStackedPanels(): void {
 
       ScrollTrigger.create({
         trigger: catalog,
-        start: "top top",
-        end: () => `+=${transitionCount * window.innerHeight}`,
+        start: `top top+=${navbarHeight}`,
+        end: () => `+=${transitionCount * catalog.getBoundingClientRect().height * 1.15}`,
         pin: true,
         pinSpacing: true,
-        scrub: 1,
+        scrub: 0.5,
         animation: tl,
-        anticipatePin: 1,
         invalidateOnRefresh: true,
       });
     }, catalog);

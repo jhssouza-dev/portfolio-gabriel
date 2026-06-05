@@ -22,8 +22,8 @@ export function useLenis(): void {
     if (prefersReducedMotion || isMobile) return;
 
     const lenis = new Lenis({
-      lerp: 0.07,
-      wheelMultiplier: 0.9,
+      lerp: 0.10,
+      wheelMultiplier: 0.8,
       smoothWheel: true,
       syncTouch: false,
       autoRaf: false,

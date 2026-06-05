@@ -33,13 +33,13 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s — Ana Lima Arquitetura",
-    default: "Ana Lima Arquitetura",
+    template: "%s — Gabriel Silva",
+    default: "Gabriel Silva",
   },
   description:
-    "Escritório de arquitetura contemporânea baseado em São Paulo. Projetos residenciais, comerciais e institucionais.",
+    "Portfólio de arquitetura com estudos, projetos e representação visual.",
   openGraph: {
-    siteName: "Ana Lima Arquitetura",
+    siteName: "Gabriel Silva",
     locale: "pt_BR",
     type: "website",
   },

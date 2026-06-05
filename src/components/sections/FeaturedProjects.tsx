@@ -16,13 +16,15 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
        */}
       <div
         data-stacked-catalog
-        className="relative hidden h-svh overflow-hidden bg-canvas lg:block"
+        className="relative hidden overflow-hidden bg-canvas lg:block"
+        style={{ height: "calc(100svh - var(--navbar-height))" }}
       >
         {sorted.map((project, i) => (
           <article
             key={project.slug}
             data-catalog-panel
-            className="absolute inset-0 h-svh w-full bg-surface"
+            className="absolute inset-0 w-full bg-surface"
+            style={{ height: "calc(100svh - var(--navbar-height))" }}
           >
             {/* Cover photo */}
             <div data-panel-image className="absolute inset-0">
@@ -150,10 +152,10 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
           {/* Section header */}
           <div className="mb-8 flex items-baseline justify-between border-t border-border pt-8">
             <p className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-accent">
-              Catálogo
+              Estudos e projetos
             </p>
             <p className="font-sans text-[0.65rem] text-muted">
-              {sorted.length}&nbsp;{sorted.length === 1 ? "obra" : "obras"}
+              {sorted.length}&nbsp;{sorted.length === 1 ? "projeto" : "projetos"}
             </p>
           </div>
 

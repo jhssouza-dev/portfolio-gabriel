@@ -40,6 +40,16 @@ html {
   scroll-behavior: auto;
 }
 
+/* ── Navbar height — confirmado pelo espaçador em MobileNav (h-[72px]) ── */
+:root {
+  --navbar-height: 72px;
+}
+
+/* ── Scroll anchors — offset da Navbar fixa ao navegar por âncoras ─────── */
+[id] {
+  scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
+}
+
 body {
   background-color: var(--color-canvas);
   color: var(--color-fg);
