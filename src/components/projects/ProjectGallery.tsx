@@ -5,8 +5,6 @@ export default function ProjectGallery({ project }: { project: Project }) {
   const items = project.gallery;
   if (items.length === 0) return null;
 
-  const trailingOdd = items.length > 1 && (items.length - 1) % 2 !== 0;
-
   return (
     <section className="pb-16">
       {/* Label */}
@@ -27,8 +25,8 @@ export default function ProjectGallery({ project }: { project: Project }) {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {items.map((img, i) => {
             const naturalRatio = img.width / img.height;
-            const isLastAlone = trailingOdd && i === items.length - 1;
-            const spanFull = i === 0 || isLastAlone;
+            // Somente a primeira imagem ocupa largura total
+            const spanFull = i === 0;
 
             // Full-width: mínimo 1.6 evita que imagens quadradas/retrato
             // virem containers imensos; máximo 2.6 para panoramas extremos
