@@ -78,7 +78,7 @@ export function useStackedPanels(): void {
         end: () => `+=${transitionCount * catalog.getBoundingClientRect().height * 1.15}`,
         pin: true,
         pinSpacing: true,
-        scrub: 0.35,
+        scrub: 0.45,
         animation: tl,
         invalidateOnRefresh: true,
       });
