@@ -32,6 +32,7 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                 src={project.coverImage.src}
                 alt={project.coverImage.alt}
                 fill
+                unoptimized
                 priority={i === 0}
                 sizes="100vw"
                 className="object-cover"
