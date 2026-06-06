@@ -21,7 +21,7 @@ export default function Footer() {
               Localização
             </p>
             <p className="font-sans text-sm leading-relaxed text-dark-fg/60">
-              São Paulo, SP
+              Aracaju, SE
               <br />
               Brasil
             </p>
@@ -32,7 +32,7 @@ export default function Footer() {
               Contato
             </p>
             <p className="font-sans text-sm text-dark-fg/60">
-              contato@gabrielsilva.com.br
+              gabrielsilva.arch@gmail.com
             </p>
             <p className="mt-1 font-sans text-sm text-dark-fg/60">
               @gabrielsilva.arq
@@ -69,11 +69,9 @@ export default function Footer() {
         {/* Rodapé */}
         <div className="mt-10 flex items-center justify-between border-t border-dark-border pt-6">
           <p className="font-sans text-[0.6rem] text-dark-fg/35">
-            © 2024 Gabriel Silva · Todos os direitos reservados
+            © 2026 Gabriel Silva · Todos os direitos reservados
           </p>
-          <p className="font-sans text-[0.6rem] text-dark-fg/35">
-            São Paulo · Brasil
-          </p>
+            
         </div>
       </div>
     </footer>

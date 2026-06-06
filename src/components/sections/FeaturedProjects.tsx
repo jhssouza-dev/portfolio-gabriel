@@ -60,15 +60,22 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
             {/* Strong bottom gradient */}
             <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-linear-to-t from-canvas to-transparent" />
 
+            {/* Painel inteiro clicável */}
+            <Link
+              href={`/projects/${project.slug}`}
+              className="absolute inset-0 z-10"
+              aria-label={`Ver projeto ${project.title}`}
+            />
+
             {/* Panel counter — data-panel-counter */}
-            <div data-panel-counter className="absolute left-16 top-12">
+            <div data-panel-counter className="absolute left-16 top-12 z-20">
               <span className="font-sans text-[0.55rem] font-medium uppercase tracking-[0.3em] text-muted/60">
                 {String(i + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(sorted.length).padStart(2, "0")}
               </span>
             </div>
 
             {/* Panel content — bottom */}
-            <div className="absolute bottom-0 left-0 right-0 px-16 pb-20">
+            <div className="absolute bottom-0 left-0 right-0 z-20 px-16 pb-20">
               {/* Category · Location · Year — data-panel-kicker */}
               <div
                 data-panel-kicker
@@ -103,9 +110,9 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                 </p>
               )}
 
-              {/* Bottom row: meta + CTA */}
+              {/* Bottom row: meta + CTA decorativo */}
               <div className="mt-8 flex items-end gap-10">
-                {/* Area + Status juntos — data-panel-meta */}
+                {/* Area + Status — data-panel-meta */}
                 <div data-panel-meta className="flex items-end gap-10">
                   <div>
                     <p className="font-sans text-[0.55rem] uppercase tracking-[0.18em] text-muted">
@@ -127,17 +134,13 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
 
                 <div className="flex-1" />
 
-                {/* CTA — data-panel-cta */}
-                <Link
-                  href={`/projects/${project.slug}`}
+                {/* CTA decorativo — painel inteiro já é link */}
+                <div
                   data-panel-cta
-                  className="group inline-flex items-center gap-3 border border-fg/20 px-5 py-2.5 font-sans text-[0.6rem] font-medium uppercase tracking-[0.22em] text-fg transition-all hover:border-fg hover:bg-fg hover:text-canvas"
+                  className="inline-flex items-center gap-3 border border-fg/20 px-5 py-2.5 font-sans text-[0.6rem] font-medium uppercase tracking-[0.22em] text-fg"
                 >
-                  Ver projeto
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                    →
-                  </span>
-                </Link>
+                  Ver projeto <span>→</span>
+                </div>
               </div>
             </div>
           </article>
