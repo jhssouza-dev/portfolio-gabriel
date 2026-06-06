@@ -32,6 +32,7 @@
 html {
   scroll-behavior: smooth; /* fallback âncoras sem JS */
   text-size-adjust: 100%;
+  overflow-anchor: none;
 }
 
 /* Quando JS está ativo, Lenis gerencia o scroll suave */
@@ -59,6 +60,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
+  overflow-anchor: none;
 }
 
 /* ── FOSC — esconde data-reveal antes do GSAP inicializar ── */
