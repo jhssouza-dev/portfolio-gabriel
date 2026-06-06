@@ -5,12 +5,11 @@ import type { Project } from "@/types/project";
 export default function ProjectHero({ project }: { project: Project }) {
   return (
     <section
-      className="bg-canvas pb-16"
+      className="bg-canvas pb-8"
       style={{ paddingTop: "calc(var(--navbar-height) + 4rem)" }}
     >
+      {/* Cabeçalho editorial — constrangido a max-w-7xl */}
       <div className="mx-auto max-w-7xl px-8 md:px-16">
-
-        {/* Back link — visível imediatamente, sem data-reveal */}
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary transition-colors hover:text-fg"
@@ -18,7 +17,6 @@ export default function ProjectHero({ project }: { project: Project }) {
           ← Catálogo de projetos
         </Link>
 
-        {/* Cabeçalho editorial */}
         <div className="mt-10 border-t border-border pt-10">
           <p
             data-reveal="label"
@@ -42,19 +40,20 @@ export default function ProjectHero({ project }: { project: Project }) {
           )}
           <div data-reveal="line" className="mt-8 h-px w-16 bg-accent" />
         </div>
+      </div>
 
-        {/* Imagem principal — contida, não full-screen */}
-        <div className="relative mt-14 aspect-video overflow-hidden bg-surface">
+      {/* Imagem principal — mais larga que o cabeçalho */}
+      <div className="mx-auto mt-12 max-w-350 px-4 md:px-8">
+        <div className="relative aspect-video overflow-hidden bg-surface">
           <Image
             src={project.coverImage.src}
             alt={project.coverImage.alt}
             fill
             priority
-            sizes="(max-width: 768px) calc(100vw - 4rem), (max-width: 1280px) calc(100vw - 8rem), 1216px"
+            sizes="(max-width: 768px) calc(100vw - 2rem), min(1400px, calc(100vw - 4rem))"
             className="object-cover"
           />
         </div>
-
       </div>
     </section>
   );

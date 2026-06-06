@@ -45,8 +45,8 @@ export default async function ProjectPage({
       {/* ── HERO ─────────────────────────────────────────────── */}
       <ProjectHero project={project} />
 
-      {/* ── CONTEÚDO ─────────────────────────────────────────── */}
-      <div className="mx-auto max-w-5xl px-8 pb-24 pt-16 md:px-16">
+      {/* ── DESCRIÇÃO + META ─────────────────────────────────── */}
+      <div className="mx-auto max-w-6xl px-8 pb-16 pt-12 md:px-16">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-[1fr_260px] md:gap-12">
           {/* Texto principal */}
           <div>
@@ -72,13 +72,13 @@ export default async function ProjectPage({
           {/* Metadados laterais */}
           <ProjectMeta project={project} />
         </div>
-
-        {/* Galeria */}
-        <ProjectGallery project={project} />
       </div>
 
+      {/* ── GALERIA — container próprio mais largo ───────────── */}
+      <ProjectGallery project={project} />
+
       {/* ── NAVEGAÇÃO: ANTERIOR / LISTAGEM / PRÓXIMO ────────── */}
-      <div className="mx-auto max-w-5xl px-8 pb-24 md:px-16">
+      <div className="mx-auto max-w-6xl px-8 pb-24 md:px-16">
         <div className="grid grid-cols-3 items-start gap-4 border-t border-border pt-10">
           {/* Anterior */}
           <div>
@@ -94,7 +94,7 @@ export default async function ProjectPage({
             )}
           </div>
 
-          {/* Centro: voltar ao catálogo da Home — sempre visível */}
+          {/* Centro */}
           <div className="flex justify-center">
             <Link href="/#projects" className="group text-center">
               <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted transition-colors group-hover:text-fg">
