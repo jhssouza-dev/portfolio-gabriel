@@ -8,7 +8,8 @@ export type ProjectType =
   | "Paisagismo"
   | "Reforma"
   | "Interiores"
-  | "Urbanismo";
+  | "Urbanismo"
+  | "Hotelaria";
 
 export interface ProjectImage {
   src: string;
