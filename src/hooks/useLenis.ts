@@ -23,12 +23,13 @@ export function useLenis(): void {
 
     const lenis = new Lenis({
       duration: 1.8,
-      easing: (t: number) => t < 0.75 ? 1 - Math.pow(1 - t / 0.75, 5) : 1,
+      easing: (t: number) => t < 0.8 ? 1 - Math.pow(1 - t / 0.8, 3) : 1,
       wheelMultiplier: 0.7,
       smoothWheel: true,
       syncTouch: false,
       overscroll: false,
       autoRaf: false,
+      virtualScroll: (e: { deltaY: number }) => Math.abs(e.deltaY) > 1,
     });
 
     setLenis(lenis);
