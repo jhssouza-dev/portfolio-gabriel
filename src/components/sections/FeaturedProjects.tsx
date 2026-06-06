@@ -27,17 +27,15 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
             style={{ height: "calc(100svh - var(--navbar-height))" }}
           >
             {/* Cover photo */}
-            <div data-panel-image className="absolute inset-0">
-              <Image
-                src={project.coverImage.src}
-                alt={project.coverImage.alt}
-                fill
-                unoptimized
-                priority={i === 0}
-                sizes="100vw"
-                className="object-cover"
-              />
-            </div>
+            <Image
+              data-panel-image
+              src={project.coverImage.src}
+              alt={project.coverImage.alt}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="object-cover"
+            />
 
             {/* Subtle scrim */}
             <div className="absolute inset-0 bg-canvas/25" />
