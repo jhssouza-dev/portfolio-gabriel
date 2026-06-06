@@ -23,6 +23,7 @@ export function useLenis(): void {
 
     const lenis = new Lenis({
       duration: 1.8,
+      easing: (t: number) => 1 - Math.pow(1 - t, 5),
       wheelMultiplier: 0.7,
       smoothWheel: true,
       syncTouch: false,
