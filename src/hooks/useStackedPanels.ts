@@ -47,9 +47,15 @@ export function useStackedPanels(): void {
 
       const tl = gsap.timeline({ defaults: { ease: "none" } });
 
+      // Cada painel tem um "slot" = hold (painel visível, nada anima) + transição (1 unidade).
+      // O hold final do último painel é coberto pelo scroll extra no `end`.
+      const hold = 0.25;
+
       for (let i = 0; i < transitionCount; i++) {
         const current = panels[i];
         const next = panels[i + 1];
+        // Transição começa após o hold deste slot
+        const at = i * (hold + 1) + hold;
 
         tl.to(
           current,
@@ -59,7 +65,7 @@ export function useStackedPanels(): void {
             filter: "blur(1.5px)",
             duration: 1,
           },
-          i
+          at
         );
 
         tl.to(
@@ -68,14 +74,18 @@ export function useStackedPanels(): void {
             yPercent: 0,
             duration: 1,
           },
-          i
+          at
         );
       }
+
+      // Duração total = slots + hold final (o scrub fica no último frame durante esse trecho)
+      const totalDuration = transitionCount * (hold + 1) + hold;
 
       ScrollTrigger.create({
         trigger: catalog,
         start: `top top+=${navbarHeight}`,
-        end: () => `+=${transitionCount * catalog.getBoundingClientRect().height * 1.15}`,
+        end: () =>
+          `+=${totalDuration * catalog.getBoundingClientRect().height * 1.15}`,
         pin: true,
         pinSpacing: true,
         scrub: true,

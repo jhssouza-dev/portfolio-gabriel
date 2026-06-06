@@ -46,8 +46,8 @@ export default async function ProjectPage({
       <ProjectHero project={project} />
 
       {/* ── DESCRIÇÃO + META ─────────────────────────────────── */}
-      <div className="mx-auto max-w-6xl px-8 pb-16 pt-12 md:px-16">
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-[1fr_260px] md:gap-12">
+      <div className="mx-auto max-w-6xl px-8 md:px-16">
+        <div className="grid grid-cols-1 gap-8 border-y border-border py-10 md:grid-cols-[1.3fr_1fr] md:gap-12">
           {/* Texto principal */}
           <div>
             <p
@@ -60,7 +60,7 @@ export default async function ProjectPage({
             {project.concept && (
               <blockquote
                 data-reveal="text"
-                className="mt-12 border-l-2 border-accent pl-6"
+                className="mt-6 border-l-2 border-accent pl-6"
               >
                 <p className="font-serif text-[clamp(1rem,1.5vw,1.2rem)] italic leading-[1.65] text-secondary">
                   &ldquo;{project.concept}&rdquo;
@@ -78,8 +78,8 @@ export default async function ProjectPage({
       <ProjectGallery project={project} />
 
       {/* ── NAVEGAÇÃO: ANTERIOR / LISTAGEM / PRÓXIMO ────────── */}
-      <div className="mx-auto max-w-6xl px-8 pb-24 md:px-16">
-        <div className="grid grid-cols-3 items-start gap-4 border-t border-border pt-10">
+      <div className="mx-auto max-w-6xl px-8 pb-12 md:px-16">
+        <div className="grid grid-cols-3 items-start gap-4 border-t border-border pt-8">
           {/* Anterior */}
           <div>
             {prev && (

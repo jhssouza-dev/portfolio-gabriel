@@ -2,7 +2,10 @@ import type { Project } from "@/types/project";
 
 export default function ProjectMeta({ project }: { project: Project }) {
   return (
-    <aside data-reveal="text" className="space-y-8">
+    <aside
+      data-reveal="text"
+      className="grid grid-cols-1 gap-y-0 sm:grid-cols-2 sm:gap-x-8"
+    >
       <MetaGroup label="Localização">
         <p className="font-sans text-sm text-secondary">{project.location}</p>
       </MetaGroup>
@@ -22,7 +25,7 @@ export default function ProjectMeta({ project }: { project: Project }) {
       </MetaGroup>
 
       {project.architects && project.architects.length > 0 && (
-        <MetaGroup label="Arquitetos">
+        <MetaGroup label="Arquitetos" fullWidth>
           {project.architects.map((name) => (
             <p key={name} className="font-sans text-sm text-secondary">
               {name}
@@ -32,8 +35,8 @@ export default function ProjectMeta({ project }: { project: Project }) {
       )}
 
       {project.services && project.services.length > 0 && (
-        <MetaGroup label="Serviços">
-          <ul className="space-y-1">
+        <MetaGroup label="Serviços" fullWidth>
+          <ul className="space-y-0.5">
             {project.services.map((s) => (
               <li key={s} className="font-sans text-sm text-secondary">
                 {s}
@@ -44,8 +47,8 @@ export default function ProjectMeta({ project }: { project: Project }) {
       )}
 
       {project.awards && project.awards.length > 0 && (
-        <MetaGroup label="Prêmios">
-          <ul className="space-y-2">
+        <MetaGroup label="Prêmios" fullWidth>
+          <ul className="space-y-1">
             {project.awards.map((award) => (
               <li key={award} className="font-sans text-sm italic text-accent">
                 {award}
@@ -61,13 +64,17 @@ export default function ProjectMeta({ project }: { project: Project }) {
 function MetaGroup({
   label,
   children,
+  fullWidth,
 }: {
   label: string;
   children: React.ReactNode;
+  fullWidth?: boolean;
 }) {
   return (
-    <div className="border-t border-border pt-4">
-      <p className="mb-2 font-sans text-[0.6rem] font-medium uppercase tracking-[0.18em] text-muted">
+    <div
+      className={`border-t border-border pb-3 pt-3 ${fullWidth ? "sm:col-span-2" : ""}`}
+    >
+      <p className="mb-1 font-sans text-[0.6rem] font-medium uppercase tracking-[0.18em] text-muted">
         {label}
       </p>
       {children}

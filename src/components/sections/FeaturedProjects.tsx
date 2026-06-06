@@ -68,14 +68,14 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
             />
 
             {/* Panel counter — data-panel-counter */}
-            <div data-panel-counter className="absolute left-16 top-12 z-20">
+            <div data-panel-counter className="absolute left-16 top-12 z-20 pointer-events-none">
               <span className="font-sans text-[0.55rem] font-medium uppercase tracking-[0.3em] text-muted/60">
                 {String(i + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(sorted.length).padStart(2, "0")}
               </span>
             </div>
 
             {/* Panel content — bottom */}
-            <div className="absolute bottom-0 left-0 right-0 z-20 px-16 pb-20">
+            <div className="absolute bottom-0 left-0 right-0 z-20 px-16 pb-20 pointer-events-none">
               {/* Category · Location · Year — data-panel-kicker */}
               <div
                 data-panel-kicker
