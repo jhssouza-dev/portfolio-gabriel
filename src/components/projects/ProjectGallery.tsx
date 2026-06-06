@@ -2,7 +2,8 @@ import Image from "next/image";
 import type { Project } from "@/types/project";
 
 export default function ProjectGallery({ project }: { project: Project }) {
-  const items = [project.coverImage, ...project.gallery];
+  const items = project.gallery;
+  if (items.length === 0) return null;
 
   return (
     <section className="mt-24">

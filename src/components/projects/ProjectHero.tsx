@@ -1,53 +1,60 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Project } from "@/types/project";
 
 export default function ProjectHero({ project }: { project: Project }) {
   return (
-    <section className="relative flex h-svh flex-col justify-end bg-surface">
-      {/* Cover photo — below all overlays */}
-      <Image
-        src={project.coverImage.src}
-        alt={project.coverImage.alt}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
-      />
+    <section
+      className="bg-canvas pb-16"
+      style={{ paddingTop: "calc(var(--navbar-height) + 4rem)" }}
+    >
+      <div className="mx-auto max-w-7xl px-8 md:px-16">
 
-      {/* Atmosphere gradient — semi-transparent so photo shows through */}
-      <div className="absolute inset-0 bg-linear-to-br from-canvas/70 via-canvas/10 to-transparent" />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 35% 45%, rgba(176,138,90,0.08) 0%, transparent 65%)",
-        }}
-      />
-      {/* Strong bottom gradient — keeps text legible over any photo */}
-      <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-linear-to-t from-canvas to-transparent" />
+        {/* Back link — visível imediatamente, sem data-reveal */}
+        <Link
+          href="/#projects"
+          className="inline-flex items-center gap-2 font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary transition-colors hover:text-fg"
+        >
+          ← Catálogo de projetos
+        </Link>
 
-      <div className="relative z-10 px-8 pb-16 md:px-16 md:pb-20">
-        <p
-          data-reveal="label"
-          className="mb-4 font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary"
-        >
-          {project.type}&nbsp;·&nbsp;{project.year}
-        </p>
-        <h1
-          data-reveal="title"
-          className="font-display text-[clamp(3rem,8vw,7rem)] font-black uppercase leading-none tracking-tight text-fg"
-        >
-          {project.title}
-        </h1>
-        {project.subtitle && (
+        {/* Cabeçalho editorial */}
+        <div className="mt-10 border-t border-border pt-10">
           <p
-            data-reveal="text"
-            className="mt-4 max-w-lg font-serif text-[clamp(1rem,1.8vw,1.35rem)] italic leading-relaxed text-secondary"
+            data-reveal="label"
+            className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-accent"
           >
-            {project.subtitle}
+            {project.type}&nbsp;·&nbsp;{project.location}&nbsp;·&nbsp;{project.year}
           </p>
-        )}
-        <div data-reveal="line" className="mt-8 h-px w-16 bg-accent" />
+          <h1
+            data-reveal="title"
+            className="mt-6 font-display text-[clamp(3rem,8vw,7rem)] font-black uppercase leading-none tracking-tight text-fg"
+          >
+            {project.title}
+          </h1>
+          {project.subtitle && (
+            <p
+              data-reveal="text"
+              className="mt-4 max-w-2xl font-serif text-[clamp(1rem,1.8vw,1.35rem)] italic leading-relaxed text-secondary"
+            >
+              {project.subtitle}
+            </p>
+          )}
+          <div data-reveal="line" className="mt-8 h-px w-16 bg-accent" />
+        </div>
+
+        {/* Imagem principal — contida, não full-screen */}
+        <div className="relative mt-14 aspect-video overflow-hidden bg-surface">
+          <Image
+            src={project.coverImage.src}
+            alt={project.coverImage.alt}
+            fill
+            priority
+            sizes="(max-width: 768px) calc(100vw - 4rem), (max-width: 1280px) calc(100vw - 8rem), 1216px"
+            className="object-cover"
+          />
+        </div>
+
       </div>
     </section>
   );

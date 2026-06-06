@@ -46,16 +46,7 @@ export default async function ProjectPage({
       <ProjectHero project={project} />
 
       {/* ── CONTEÚDO ─────────────────────────────────────────── */}
-      <div className="mx-auto max-w-5xl px-8 py-20 md:px-16">
-        {/* Link de retorno — topo do conteúdo, antes dos metadados */}
-        <Link
-          href="/#projects"
-          data-reveal="label"
-          className="mb-12 inline-flex items-center gap-2 font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary transition-colors hover:text-fg"
-        >
-          ← Catálogo de projetos
-        </Link>
-
+      <div className="mx-auto max-w-5xl px-8 pb-24 pt-16 md:px-16">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-[1fr_260px] md:gap-12">
           {/* Texto principal */}
           <div>
