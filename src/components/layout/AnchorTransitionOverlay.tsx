@@ -22,16 +22,18 @@ function snapRaw(y: number): void {
   }
 }
 
-// Positions `target` so its top edge lands exactly at navbarHeight + 24px.
-// Reads the actual rendered header height instead of relying on a constant,
-// so it's correct even if the navbar changes size.
+// Positions `target` so its top edge lands at the value defined by its CSS
+// scroll-margin-top. Each section declares its own offset in globals.css:
+//   [id]       → calc(--navbar-height + 1.5rem)   (default, breathing room)
+//   #projects  → var(--navbar-height)              (flush: catalog fills viewport)
+// Falls back to the rendered header height if the property is unavailable.
 function pinElement(target: HTMLElement): void {
-  const navbarHeight =
-    document.querySelector("header")?.getBoundingClientRect().height ?? 72;
-  const desiredTop = navbarHeight + 24; // 1.5rem gap = 24px
+  const desiredTop =
+    parseFloat(getComputedStyle(target).scrollMarginTop) ||
+    (document.querySelector("header")?.getBoundingClientRect().height ?? 72);
   const currentTop = target.getBoundingClientRect().top;
   const delta = currentTop - desiredTop;
-  if (Math.abs(delta) <= 1) return; // already in position
+  if (Math.abs(delta) <= 1) return;
   snapRaw(Math.max(0, window.scrollY + delta));
 }
 

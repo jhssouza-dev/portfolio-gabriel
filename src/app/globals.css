@@ -59,6 +59,11 @@ html {
   scroll-margin-top: calc(var(--navbar-height) + 1.5rem);
 }
 
+/* Catálogo: panel preenche 100svh - navbar-height, então deve encostar no navbar */
+#projects {
+  scroll-margin-top: var(--navbar-height);
+}
+
 body {
   background-color: var(--color-canvas);
   color: var(--color-fg);

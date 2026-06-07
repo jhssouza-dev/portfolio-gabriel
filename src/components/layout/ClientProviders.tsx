@@ -26,8 +26,10 @@ export default function ClientProviders({
     if (!el) return;
     const lenis = getLenis();
     requestAnimationFrame(() => {
-      // offset -96 = --navbar-height (72px) + 1.5rem gap (24px), espelhando scroll-margin-top do CSS
-      if (lenis) lenis.scrollTo(el, { offset: -96, immediate: true });
+      // Usa o scroll-margin-top definido no CSS para cada seção — mesmo valor
+      // que pinElement usa — assim os dois sistemas sempre concordam.
+      const scrollMargin = parseFloat(getComputedStyle(el).scrollMarginTop) || 72;
+      if (lenis) lenis.scrollTo(el, { offset: -scrollMargin, immediate: true });
       else el.scrollIntoView();
     });
   }, [pathname]);
