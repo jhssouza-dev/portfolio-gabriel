@@ -47,12 +47,12 @@ export default async function ProjectPage({
 
       {/* ── DESCRIÇÃO + META ─────────────────────────────────── */}
       <div className="mx-auto max-w-6xl px-8 md:px-16">
-        <div className="grid grid-cols-1 gap-8 border-y border-border py-10 md:grid-cols-[1.3fr_1fr] md:gap-12">
+        <div className="grid grid-cols-1 gap-6 border-y border-border py-7 md:grid-cols-[1.3fr_1fr] md:gap-12 md:py-10">
           {/* Texto principal */}
           <div>
             <p
               data-reveal="text"
-              className="font-serif text-[clamp(1.05rem,1.8vw,1.4rem)] leading-[1.75] text-fg"
+              className="font-serif text-[1.08rem] leading-[1.55] text-fg md:text-body-lg md:leading-[1.75]"
             >
               {project.description}
             </p>
@@ -60,9 +60,9 @@ export default async function ProjectPage({
             {project.concept && (
               <blockquote
                 data-reveal="text"
-                className="mt-6 border-l-2 border-accent pl-6"
+                className="mt-4 border-l-2 border-accent py-1 pl-4 md:mt-6 md:pl-6"
               >
-                <p className="font-serif text-[clamp(1rem,1.5vw,1.2rem)] italic leading-[1.65] text-secondary">
+                <p className="font-serif text-[1rem] italic leading-[1.45] text-secondary md:text-body-md md:leading-[1.65]">
                   &ldquo;{project.concept}&rdquo;
                 </p>
               </blockquote>
@@ -84,10 +84,10 @@ export default async function ProjectPage({
           <div>
             {prev && (
               <Link href={`/projects/${prev.slug}`} className="group">
-                <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
+                <span className="block font-sans text-[0.68rem] uppercase tracking-[0.12em] text-muted md:text-[0.6rem] md:tracking-[0.15em]">
                   ← Anterior
                 </span>
-                <span className="font-serif text-base italic text-secondary transition-colors group-hover:text-fg">
+                <span className="font-serif text-[clamp(1.08rem,1.5vw,1.1rem)] italic text-secondary transition-colors group-hover:text-fg">
                   {prev.title}
                 </span>
               </Link>
@@ -97,10 +97,10 @@ export default async function ProjectPage({
           {/* Centro */}
           <div className="flex justify-center">
             <Link href="/#projects" className="group text-center">
-              <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted transition-colors group-hover:text-fg">
+              <span className="block font-sans text-[0.68rem] uppercase tracking-[0.12em] text-muted transition-colors group-hover:text-fg md:text-[0.6rem] md:tracking-[0.15em]">
                 Catálogo
               </span>
-              <span className="font-serif text-sm italic text-secondary transition-colors group-hover:text-fg">
+              <span className="font-serif text-base italic text-secondary transition-colors group-hover:text-fg md:text-sm">
                 Ver catálogo →
               </span>
             </Link>
@@ -110,10 +110,10 @@ export default async function ProjectPage({
           <div className="text-right">
             {next && (
               <Link href={`/projects/${next.slug}`} className="group">
-                <span className="block font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
+                <span className="block font-sans text-[0.68rem] uppercase tracking-[0.12em] text-muted md:text-[0.6rem] md:tracking-[0.15em]">
                   Próximo →
                 </span>
-                <span className="font-serif text-base italic text-secondary transition-colors group-hover:text-fg">
+                <span className="font-serif text-[clamp(1.08rem,1.5vw,1.1rem)] italic text-secondary transition-colors group-hover:text-fg">
                   {next.title}
                 </span>
               </Link>

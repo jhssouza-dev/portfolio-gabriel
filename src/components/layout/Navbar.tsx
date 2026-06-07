@@ -26,6 +26,12 @@ export default function Navbar() {
           Sobre
         </Link>
         <Link
+          href="/#experiencia"
+          className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary transition-colors hover:text-fg"
+        >
+          Experiência
+        </Link>
+        <Link
           href="/#contact"
           className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary transition-colors hover:text-fg"
         >

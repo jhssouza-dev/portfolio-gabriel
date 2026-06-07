@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { projects } from "@/data/projects";
 import FeaturedProjects from "@/components/sections/FeaturedProjects";
+import ExperienceSection from "@/components/sections/ExperienceSection";
 
 export const metadata: Metadata = {
   title: "Gabriel Silva — Portfólio",
@@ -13,8 +14,8 @@ export default function Home() {
   return (
     <main>
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="relative flex h-svh flex-col justify-end bg-surface">
-        {/* Placeholder visual — substituir por next/image quando houver fotos */}
+      <section className="relative flex h-svh flex-col justify-end bg-canvas">
+        {/* Fallback background — visible on mobile / no-WebGL / reduced-motion */}
         <div className="absolute inset-0 bg-linear-to-br from-canvas via-elevated to-surface" />
         <div
           className="absolute inset-0"
@@ -23,12 +24,40 @@ export default function Home() {
               "radial-gradient(ellipse 80% 60% at 65% 35%, rgba(176,138,90,0.08) 0%, transparent 65%)",
           }}
         />
+        <Image
+          src="/videos/Hero-poster.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="absolute inset-0 object-cover opacity-80 mix-blend-multiply md:hidden motion-reduce:md:block"
+        />
+
+        {/* WebGL scene — mounts only when: desktop + WebGL available + no reduced-motion */}
+        <video
+          className="absolute inset-0 hidden h-full w-full object-cover opacity-90 mix-blend-multiply md:block motion-reduce:hidden"
+          autoPlay
+          muted
+          playsInline
+          preload="metadata"
+          poster="/videos/Hero-poster.webp"
+        >
+          <source
+            src="/videos/Hero.stabilized.mp4"
+            type="video/mp4"
+            media="(min-width: 768px) and (prefers-reduced-motion: no-preference)"
+          />
+        </video>
+        <div className="absolute inset-0 bg-canvas/20 motion-reduce:bg-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_68%_32%,transparent_0%,rgba(245,240,231,0.35)_40%,rgba(245,240,231,0.7)_100%)]" />
+
+        {/* Bottom gradient — readability layer, always above the canvas */}
         <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-linear-to-t from-canvas to-transparent" />
 
         <div className="relative z-10 px-8 pb-16 md:px-16 md:pb-20">
           <p
             data-reveal="label"
-            className="mb-4 font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-secondary"
+            className="mb-4 font-sans text-[0.72rem] font-medium uppercase tracking-[0.18em] text-secondary md:text-[0.65rem] md:tracking-[0.2em]"
           >
             Portfólio de arquitetura
           </p>
@@ -40,7 +69,7 @@ export default function Home() {
           </h1>
           <p
             data-reveal="text"
-            className="mt-6 max-w-sm font-serif text-[clamp(1rem,1.8vw,1.35rem)] italic leading-relaxed text-secondary"
+            className="mt-6 max-w-sm font-serif text-subtitle italic leading-relaxed text-secondary"
           >
             Arquitetura, projeto e representação visual.
           </p>
@@ -54,13 +83,13 @@ export default function Home() {
           
             <blockquote
               data-reveal="title"
-              className="font-serif text-[clamp(2rem,4.5vw,3.8rem)] italic leading-[1.3] text-fg"
+              className="font-serif text-[clamp(2.25rem,4.5vw,3.8rem)] italic leading-[1.25] text-fg md:leading-[1.3]"
             >
               Projetar também é organizar ideias, usos e possibilidades.
             </blockquote>
             <p
               data-reveal="text"
-              className="mt-10 font-serif text-[clamp(1.2rem,2.2vw,1.65rem)] leading-[1.75] text-secondary"
+              className="mt-8 font-serif text-body-xl leading-[1.65] text-secondary md:mt-10 md:leading-[1.75]"
             >
               Cada proposta começa pela leitura do espaço, das necessidades do projeto e da forma como as pessoas vão se relacionar com o ambiente. A partir disso, o desenho, a técnica e a representação ajudam a transformar uma intenção em algo claro e comunicável.
             </p>
@@ -75,13 +104,13 @@ export default function Home() {
           <div>
             <p
               data-reveal="label"
-              className="mb-10 font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-accent"
+              className="mb-8 font-sans text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent md:mb-10 md:text-[0.65rem] md:tracking-[0.2em]"
             >
               Sobre
             </p>
             <p
               data-reveal="text"
-              className="font-serif text-[clamp(1.3rem,2.4vw,1.9rem)] leading-[1.75] text-fg"
+              className="font-serif text-body-xl leading-[1.65] text-fg md:leading-[1.75]"
             >
               Gabriel Silva atua na área de arquitetura com foco em desenvolvimento
               de projeto, representação visual e estudos espaciais. Seu trabalho
@@ -90,7 +119,7 @@ export default function Home() {
             </p>
             <p
               data-reveal="text"
-              className="mt-6 font-serif text-[clamp(1.3rem,2.4vw,1.9rem)] leading-[1.75] text-secondary"
+              className="mt-6 font-serif text-body-xl leading-[1.65] text-secondary md:leading-[1.75]"
             >
               Este portfólio reúne estudos, propostas e experimentações que mostram
               diferentes formas de pensar o espaço, organizar soluções e comunicar
@@ -105,12 +134,24 @@ export default function Home() {
               alt="Gabriel Silva"
               fill
               sizes="(max-width: 1024px) calc(100vw - 4rem), calc(50vw - 6rem)"
-              className="object-cover opacity-90"
+              className="object-cover opacity-90  "
+            />
+            {/* Vinheta editorial — funde bordas ao canvas sem afetar o centro */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse 88% 82% at 52% 46%, transparent 12%, rgba(243,239,231,0.82) 100%)",
+              }}
             />
           </div>
 
         </div>
       </section>
+
+      {/* ── EXPERIÊNCIA ──────────────────────────────────────── */}
+      <ExperienceSection />
 
       {/* ── PROJETOS ─────────────────────────────────────────── */}
       <FeaturedProjects projects={projects} />

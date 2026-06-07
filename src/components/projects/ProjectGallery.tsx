@@ -12,7 +12,7 @@ export default function ProjectGallery({ project }: { project: Project }) {
         <div className="mb-8 border-t border-border pt-8">
           <p
             data-reveal="label"
-            className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-accent"
+            className="font-sans text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent md:text-[0.65rem] md:tracking-[0.2em]"
           >
             Galeria&nbsp;·&nbsp;{items.length}{" "}
             {items.length === 1 ? "imagem" : "imagens"}
@@ -59,7 +59,7 @@ export default function ProjectGallery({ project }: { project: Project }) {
                   className={imgClass}
                 />
                 {img.caption && (
-                  <p className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-canvas/80 to-transparent px-6 pb-3 pt-8 font-sans text-[0.6rem] uppercase tracking-[0.15em] text-muted">
+                  <p className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-canvas/80 to-transparent px-6 pb-3 pt-8 font-sans text-[0.68rem] uppercase tracking-[0.12em] text-muted md:text-[0.6rem] md:tracking-[0.15em]">
                     {img.caption}
                   </p>
                 )}

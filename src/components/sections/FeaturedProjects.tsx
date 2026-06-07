@@ -104,7 +104,7 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
               {project.subtitle && (
                 <p
                   data-panel-subtitle
-                  className="mt-4 max-w-lg font-serif text-[clamp(1rem,1.5vw,1.2rem)] italic leading-relaxed text-secondary"
+                  className="mt-4 max-w-lg font-serif text-subtitle italic leading-relaxed text-secondary"
                 >
                   {project.subtitle}
                 </p>
@@ -153,10 +153,10 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
         <div className="mx-auto max-w-5xl">
           {/* Section header */}
           <div className="mb-8 flex items-baseline justify-between border-t border-border pt-8">
-            <p className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-accent">
+            <p className="font-sans text-[0.72rem] font-medium uppercase tracking-[0.18em] text-accent md:text-[0.65rem] md:tracking-[0.2em]">
               Estudos e projetos
             </p>
-            <p className="font-sans text-[0.65rem] text-muted">
+            <p className="font-sans text-[0.72rem] text-muted md:text-[0.65rem]">
               {sorted.length}&nbsp;{sorted.length === 1 ? "projeto" : "projetos"}
             </p>
           </div>
@@ -185,41 +185,41 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
 
                 {/* Card content */}
                 <div className="flex items-start gap-5">
-                  <span className="w-5 shrink-0 pt-1 font-sans text-[0.6rem] tabular-nums text-muted">
+                  <span className="w-6 shrink-0 pt-1 font-sans text-[0.72rem] tabular-nums text-muted md:text-[0.6rem]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <h2 className="font-serif text-xl italic leading-snug text-fg transition-colors group-hover:text-accent">
+                    <h2 className="font-serif text-[clamp(1.65rem,5vw,2rem)] italic leading-tight text-fg transition-colors group-hover:text-accent">
                       {project.title}
                     </h2>
                     {project.subtitle && (
-                      <p className="mt-1.5 font-sans text-sm leading-relaxed text-secondary">
+                      <p className="mt-1.5 font-serif text-body-sm italic leading-relaxed text-secondary">
                         {project.subtitle}
                       </p>
                     )}
                     <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <span className="font-sans text-[0.6rem] font-medium uppercase tracking-[0.12em] text-muted">
+                      <span className="font-sans text-[0.68rem] font-medium uppercase tracking-[0.1em] text-muted md:text-[0.6rem] md:tracking-[0.12em]">
                         {project.type}
                       </span>
-                      <span aria-hidden className="font-sans text-xs text-muted/40">
+                      <span aria-hidden className="font-sans text-sm text-muted/40 md:text-xs">
                         ·
                       </span>
-                      <span className="font-sans text-xs text-secondary">
+                      <span className="font-sans text-sm text-secondary md:text-xs">
                         {project.location}
                       </span>
-                      <span aria-hidden className="font-sans text-xs text-muted/40">
+                      <span aria-hidden className="font-sans text-sm text-muted/40 md:text-xs">
                         ·
                       </span>
-                      <span className="font-sans text-xs text-muted">
+                      <span className="font-sans text-sm text-muted md:text-xs">
                         {project.year}&nbsp;·&nbsp;{project.area.toLocaleString("pt-BR")}&nbsp;m²
                       </span>
                     </div>
                     {project.status === "Em andamento" && (
-                      <span className="mt-2 inline-block font-sans text-[0.6rem] font-medium uppercase tracking-[0.12em] text-accent">
+                      <span className="mt-2 inline-block font-sans text-[0.68rem] font-medium uppercase tracking-[0.1em] text-accent md:text-[0.6rem] md:tracking-[0.12em]">
                         Em andamento
                       </span>
                     )}
-                    <p className="mt-5 font-sans text-[0.6rem] font-medium uppercase tracking-[0.22em] text-secondary transition-colors group-hover:text-fg">
+                    <p className="mt-5 font-sans text-[0.68rem] font-medium uppercase tracking-[0.18em] text-secondary transition-colors group-hover:text-fg md:text-[0.6rem] md:tracking-[0.22em]">
                       Ver projeto →
                     </p>
                   </div>

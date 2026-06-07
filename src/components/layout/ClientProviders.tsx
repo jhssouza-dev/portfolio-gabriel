@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useLenis } from "@/hooks/useLenis";
 import { getLenis } from "@/store/lenis";
 import AnimationRuntime from "./AnimationRuntime";
+import AnchorTransitionOverlay from "./AnchorTransitionOverlay";
 
 export default function ClientProviders({
   children,
@@ -25,7 +26,8 @@ export default function ClientProviders({
     if (!el) return;
     const lenis = getLenis();
     requestAnimationFrame(() => {
-      if (lenis) lenis.scrollTo(el, { immediate: true });
+      // offset -96 = --navbar-height (72px) + 1.5rem gap (24px), espelhando scroll-margin-top do CSS
+      if (lenis) lenis.scrollTo(el, { offset: -96, immediate: true });
       else el.scrollIntoView();
     });
   }, [pathname]);
@@ -37,6 +39,7 @@ export default function ClientProviders({
   return (
     <>
       <AnimationRuntime />
+      <AnchorTransitionOverlay />
       {children}
     </>
   );
