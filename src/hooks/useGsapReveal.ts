@@ -24,12 +24,11 @@ export function useGsapReveal(): void {
         .forEach((el) => {
           gsap.fromTo(
             el,
-            { opacity: 0, y: 12 },
+            { opacity: 0 },
             {
               opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "power3.out",
+              duration: 1.4,
+              ease: "sine.out",
               scrollTrigger: { trigger: el, start: "top 88%", once: true },
             }
           );
@@ -41,12 +40,11 @@ export function useGsapReveal(): void {
         .forEach((el) => {
           gsap.fromTo(
             el,
-            { opacity: 0, y: 24 },
+            { opacity: 0 },
             {
               opacity: 1,
-              y: 0,
-              duration: 1.0,
-              ease: "power3.out",
+              duration: 1.6,
+              ease: "sine.out",
               scrollTrigger: { trigger: el, start: "top 88%", once: true },
             }
           );
@@ -58,12 +56,11 @@ export function useGsapReveal(): void {
         .forEach((el) => {
           gsap.fromTo(
             el,
-            { opacity: 0, y: 18 },
+            { opacity: 0 },
             {
               opacity: 1,
-              y: 0,
-              duration: 0.9,
-              ease: "power3.out",
+              duration: 1.5,
+              ease: "sine.out",
               scrollTrigger: { trigger: el, start: "top 88%", once: true },
             }
           );
@@ -80,21 +77,18 @@ export function useGsapReveal(): void {
       byParent.forEach((cards, parent) => {
         gsap.fromTo(
           cards,
-          { opacity: 0, y: 28 },
+          { opacity: 0 },
           {
             opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-            stagger: 0.08,
+            duration: 1.4,
+            ease: "sine.out",
+            stagger: 0.1,
             scrollTrigger: { trigger: parent, start: "top 85%", once: true },
           }
         );
       });
 
       // ── line (scaleX 0 → 1, da esquerda) ─────────────────
-      // opacity também é explícito: o CSS .js-ready [data-reveal] { opacity:0 }
-      // não seria sobrescrito pelo GSAP se opacity não fizesse parte do tween
       gsap.utils
         .toArray<HTMLElement>('[data-reveal="line"]')
         .forEach((el) => {
@@ -105,7 +99,7 @@ export function useGsapReveal(): void {
               opacity: 1,
               scaleX: 1,
               duration: 1.1,
-              ease: "power3.out",
+              ease: "power2.out",
               scrollTrigger: { trigger: el, start: "top 90%", once: true },
             }
           );
