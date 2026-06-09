@@ -16,6 +16,12 @@ export default function HeroVideo() {
     const poster = posterRef.current;
     if (!video || !poster) return;
 
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    if (isMobile) {
+      gsap.set(poster, { opacity: 0.9 });
+      return;
+    }
+
     let fadingOut = false;
 
     gsap.set(video, { opacity: 0 });
@@ -37,6 +43,7 @@ export default function HeroVideo() {
     }
 
     video.addEventListener("canplay", handleCanPlay);
+    if (video.readyState >= 3) handleCanPlay();
     video.addEventListener("timeupdate", handleTimeUpdate);
 
     return () => {
@@ -47,7 +54,7 @@ export default function HeroVideo() {
 
   return (
     <>
-      <div ref={posterRef} className="absolute inset-0 hidden mix-blend-multiply md:block motion-reduce:hidden">
+      <div ref={posterRef} className="absolute inset-0 mix-blend-multiply motion-reduce:hidden">
         <Image
           src="/videos/Hero-poster.webp"
           alt=""
